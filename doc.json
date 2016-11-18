@@ -1,0 +1,44 @@
+{
+  "CREATE":[{
+      "a property owner":[{
+          "method":"POST",
+          "content-type": "application/x-www-form-urlencoded",
+          "url":"/api/owners",
+          "parameters":["fname","lname","phone"],
+          "responses":["204 created","400 badRequest"]}]},{
+      "a property":[{
+          "method":"POST",
+          "content-type": "application/x-www-form-urlencoded",
+          "url":"/api/properties",
+          "parameters":["adress","value","size","owner"],
+          "responses":["204 created","400 badRequest"]}]}],
+  "GET":[{
+      "all properties":[{
+          "method":"GET",
+          "url":"/api/properties",
+          "responses":["200 ok","500 serverError"]}]},{
+      "all owners":[{
+          "method":"GET",
+          "url":"/api/owners",
+          "responses":["200 ok","500 serverError"]}]},{
+      "a owner":[{
+          "method":"GET",
+          "url":"/api/owners/:id",
+          "responses":["200 ok","400 badRequest"]}]},{
+      "all properties owned by user":[{
+          "method":"GET",
+          "url":"/api/properties/users/:id",
+          "responses":["200 ok","400 badRequest"]}]}],
+  "DELETE":[{
+      "a owner":[{
+          "method":"DELETE",
+          "url":"/api/owners/:id",
+          "responses":["200 success","500 serverError"]}]}],
+  "PUT":[{
+      "change owner details":[{
+          "method":"PUT",
+          "url":"/api/owners/:id",
+          "parameters":["fname","lname","phone"],
+          "responses":["200 ok","400 badRequest","500 serverError"]}]}
+        ]
+}
