@@ -12,7 +12,7 @@
           "url":"/api/properties",
           "parameters":["adress","value","size","owner"],
           "responses":["204 created","400 badRequest"]}]}],
-  "GET":[{
+  "READ":[{
       "all properties":[{
           "method":"GET",
           "url":"/api/properties",
@@ -29,16 +29,17 @@
           "method":"GET",
           "url":"/api/properties/users/:id",
           "responses":["200 ok","400 badRequest"]}]}],
+  "UPDATE":[{
+      "change owner details":[{
+          "method":"PUT",
+          "content-type": "application/x-www-form-urlencoded",
+          "url":"/api/owners/:id",
+          "parameters":["fname","lname","phone"],
+          "responses":["200 ok","400 badRequest","500 serverError"]}]}],
   "DELETE":[{
       "a owner":[{
           "method":"DELETE",
           "url":"/api/owners/:id",
-          "responses":["200 success","500 serverError"]}]}],
-  "PUT":[{
-      "change owner details":[{
-          "method":"PUT",
-          "url":"/api/owners/:id",
-          "parameters":["fname","lname","phone"],
-          "responses":["200 ok","400 badRequest","500 serverError"]}]}
-        ]
+          "responses":["200 success","500 serverError"]}]}]
+
 }
