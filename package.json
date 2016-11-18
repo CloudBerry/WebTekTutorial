@@ -1,0 +1,25 @@
+{
+  "name": "webtektutorial",
+  "version": "1.0.0",
+  "description": "A REST api tutorial",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CloudBerry/WebTekTutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CloudBerry/WebTekTutorial/issues"
+  },
+  "homepage": "https://github.com/CloudBerry/WebTekTutorial#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-rest-response": "^1.2.0",
+    "mysql": "^2.12.0"
+  }
+}
