@@ -4,6 +4,7 @@ let mysql = require('mysql')
 let restResponse = require('express-rest-response')
 let login = require('./login.js')
 let expressValidator = require('express-validator')
+fs = require('fs');
 
 
 let app = express()
@@ -44,11 +45,15 @@ app.use(expressValidator())
 app.use(restResponse(options))
 app.use(allowCrossDomain)
 
-let port = process.env.PORT || 8080
+let port = process.env.PORT || 8081
 let router = express.Router()
 
+
 router.get('/', (req, res) => {
-  res.json({ message: 'hooray! welcome to our api!' })
+  fs.readFile('doc.json', 'utf8', (err,data) => {
+  res.type('application/json');
+  res.send(JSON.parse(data));
+  });
 })
 
 router.route('/owners')
