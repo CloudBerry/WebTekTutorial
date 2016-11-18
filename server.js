@@ -3,7 +3,7 @@ let express = require('express')
 let mysql = require('mysql')
 let restResponse = require('express-rest-response')
 let login = require('./login.js')
-var expressValidator = require('express-validator')
+let expressValidator = require('express-validator')
 
 
 let app = express()
@@ -99,7 +99,7 @@ router.route('/owners/:id')
         if (rows.length > 0) {
           res.rest.success(rows)
         } else {
-          res.rest.noContent('No such owner')
+          res.rest.noContent()
         }
       }
     })
@@ -118,9 +118,26 @@ router.route('/owners/:id')
     })
     connection.end()
   })
-
-
-
+  .put((req, res) => {
+    req.checkBody('fname', 'Invalid postparam').notEmpty().isAlpha()
+    req.checkBody('lname', 'Invalid postparam').notEmpty().isAlpha()
+    req.checkBody('phone', 'Invalid postparam').notEmpty().isInt()
+    if (req.validationErrors()) {
+      res.rest.badRequest('Missing or malformed post parameter(s)')
+      return
+    }
+    const connection = connect_db()
+    let sql = 'UPDATE owners SET first_name=?, last_name=?, phone=?  WHERE id=?'
+    sql = mysql.format(sql, [req.body.fname, req.body.lname, req.body.phone, req.params.id])
+    connection.query(sql, (err, rows, fields) => {
+      if (err) {
+        res.rest.serverError('Database Error')
+      } else {
+        res.rest.success()
+      }
+    })
+    connection.end()
+  })
 
 
 router.route('/properties')
@@ -159,7 +176,24 @@ router.route('/properties')
     connection.end()
   })
 
-
+router.route('/properties/owners/:id')
+  .get((req, res) => {
+    const connection = connect_db()
+    let sql = 'SELECT * FROM properties WHERE owner=?'
+    sql = mysql.format(sql, [req.params.id])
+    connection.query(sql, (err, rows, fields) => {
+      if (err) {
+        res.rest.serverError('Database Error')
+      } else {
+        if (rows.length > 0) {
+          res.rest.success(rows)
+        } else {
+          res.rest.noContent()
+        }
+      }
+    })
+    connection.end()
+  })
 
 
 
